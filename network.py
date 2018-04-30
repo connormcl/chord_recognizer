@@ -5,7 +5,7 @@ import time, sys, config
 class Network(object):
 	"""Neural Network for Chord Recognition"""
 	def __init__(self, model_dest=None):
-		self.lr = 0.0005
+		self.lr = 0.001
 		self.chords = config.chords
 		self.model_dest = model_dest
 		self.live_sess = None
@@ -20,7 +20,7 @@ class Network(object):
 		self.pred_class = tf.argmax(self.logits, axis=1)
 		self.pred_probs = tf.nn.softmax(self.logits)
 		# loss op
-		l1_regularizer = tf.contrib.layers.l1_regularizer(scale=0.0001, scope=None)
+		l1_regularizer = tf.contrib.layers.l1_regularizer(scale=0.00005, scope=None)
 		penalty = tf.contrib.layers.apply_regularization(l1_regularizer, tf.trainable_variables())
 		self.loss = tf.losses.sparse_softmax_cross_entropy(labels=self.labels, logits=self.logits) + penalty
 		# optimizer

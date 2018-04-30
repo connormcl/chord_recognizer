@@ -6,7 +6,7 @@ from network import Network
 
 def main():
 	# Load training and eval data
-	print('loading data...')
+	print('loading pcp.data...')
 	# load pcp vectors
 	data = np.loadtxt('pcp.data', delimiter=',')
 	X = data[:, 0:12]
