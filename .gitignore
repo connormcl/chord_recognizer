@@ -3,3 +3,6 @@ HPCP.*
 *.pyc
 *.data
 *.wav
+checkpoints/*
+*.json
+*.sh
