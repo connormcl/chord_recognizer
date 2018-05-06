@@ -8,11 +8,10 @@ from network import Network
 chords = config.chords
 
 def print_probs(probs):
-	for i in range(len(chords)):
-		print("P(%s) = %.2f%%, " % (chords[i], probs[i]*100), end='')
-	# print(probs)
+	indices = np.argsort(probs)[::-1]
+	for i in range(5):
+		print("P(%s) = %.2f%%, " % (chords[indices[i]], probs[indices[i]]*100), end='')
 	print()
-
 
 def live_demo():
 	CHUNK = 1024
@@ -27,11 +26,8 @@ def live_demo():
 
 	while True:
 		p = pyaudio.PyAudio()
-		# info = p.get_host_api_info_by_index(0)
-		# numdevices = info.get('deviceCount')
-		# for i in range(0, numdevices):
-		# 	if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-		# 		print("Input Device id ", i, " - ", p.get_device_info_by_host_api_device_index(0, i).get('name'))
+		input("Press enter to start recording\n")
+
 		stream = p.open(format=FORMAT,
 	                channels=CHANNELS,
 	                rate=RATE,
@@ -60,14 +56,15 @@ def live_demo():
 		wf.close()
 
 		chroma = HPCP.hpcp(WAVE_OUTPUT_FILENAME, norm_frames=False, win_size=4096, hop_size=1024, output='numpy')
-		print('Total energy:', str(sum(sum(chroma))))
 		avg_chroma = np.mean(chroma, axis=0)
 		avg_chroma /= sum(avg_chroma)
+
+		probs = net.live_sess.run(net.pred_probs, feed_dict={net.input: avg_chroma.reshape((1,12))})[0]
 
 		print('-----------------------')
 		print('Prediction:', net.classify(avg_chroma))
 		print('-----------------------')
-		print_probs(net.live_sess.run(net.pred_probs, feed_dict={net.input: avg_chroma.reshape((1,12))})[0])
+		print_probs(probs)
 		print()
 
 if __name__ == '__main__':
