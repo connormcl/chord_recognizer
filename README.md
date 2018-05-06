@@ -1,5 +1,5 @@
 # Guitar Chord Recognizer
-Feedforward neural network for live guitar chord recognition.
+Feedforward neural network for live guitar chord recognition. Supported chords include A, A7, Am, B, Bm, C, C7, Cm, D, D7, Dm, E, E7, Em, F, Fm, G, G7, Gm.
 
 # Dependencies
 Make sure you have Python 3 installed, as well as the following libraries:
