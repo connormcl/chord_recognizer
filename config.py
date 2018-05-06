@@ -9,5 +9,5 @@ if os.path.isdir(root_dir): # if WAV files exist, dynamically load chords
 	chord_nums = [len(os.listdir(root_dir+'/'+chord)) for chord in chords] # number of wav files for each chord
 else: # WAV files don't exist, so presume default (note: cannot generate PCP vectors in this case)
 	chords = ['A', 'Am', 'Bm', 'C', 'D', 'Dm', 'E', 'Em', 'F', 'G', 'A7', 'B', 'C7', 'E7', 'G7', 'D7', 'Cm', 'Fm', 'Gm']
-	chords = sorted(chords)
+chords = sorted(chords)
 semi_tones = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
