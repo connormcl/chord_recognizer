@@ -28,8 +28,12 @@ def get_classifier():
 	C7 = ideal_pcp(['c', 'e', 'g', 'a#'])
 	E7 = ideal_pcp(['e', 'g#', 'b', 'd'])
 	G7 = ideal_pcp(['g', 'b', 'd', 'f'])
+	D7 = ideal_pcp(['d', 'f#', 'a', 'c'])
+	Cm = ideal_pcp(['c', 'd#', 'g'])
+	Fm = ideal_pcp(['f', 'g#', 'c'])
+	Gm = ideal_pcp(['g', 'a#', 'd'])
 
-	X = [A, Am, Bm, C, D, Dm, E, Em, F, G, A7, B, C7, E7, G7]
+	X = [A, Am, Bm, C, D, Dm, E, Em, F, G, A7, B, C7, E7, G7, D7, Cm, Fm, Gm]
 
 	classifier = KNeighborsClassifier(n_neighbors=1)
 	classifier.fit(X, np.arange(len(chords)))
